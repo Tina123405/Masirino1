@@ -1751,9 +1751,14 @@ class Handler(BaseHTTPRequestHandler):
 
 def run():
     import os
-    init_db()
-    cleanup_old_data()
-    port = int(os.environ.get("PORT", 8000))
-    server = HTTPServer(("0.0.0.0", port), Handler)
-    print(f"🚀 سرور روی پورت {port} اجرا شد")
-    server.serve_forever()
+    import sys
+    try:
+        init_db()
+        cleanup_old_data()
+        port = int(os.environ.get("PORT", 8000))
+        server = HTTPServer(("0.0.0.0", port), Handler)
+        print(f"🚀 سرور روی پورت {port} اجرا شد")
+        server.serve_forever()
+    except Exception as e:
+        print(f"❌ خطا: {e}")
+        sys.exit(1)
