@@ -1,9 +1,1 @@
-services:
-  - type: web
-    name: masirino
-    runtime: python
-    buildCommand: echo "No requirements needed"
-    startCommand: python main.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
+python -c "from http.server import HTTPServer, BaseHTTPRequestHandler; import os; port=int(os.environ.get('PORT',8000)); server=HTTPServer(('0.0.0.0',port), type('H',(BaseHTTPRequestHandler,),{'do_GET':lambda s:s.send_response(200) or s.end_headers() or s.wfile.write(b'OK')})); server.serve_forever()"
